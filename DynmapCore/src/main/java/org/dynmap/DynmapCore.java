@@ -1041,6 +1041,8 @@ public class DynmapCore implements DynmapCommonAPI {
             addServlet("/up/login", login);
             addServlet("/up/register", login);
         }
+
+        addServlet("/webmarker", new AddMarkerServlet(this));
     }
     
     public boolean isLoginSupportEnabled() {

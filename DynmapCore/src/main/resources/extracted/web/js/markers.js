@@ -111,6 +111,17 @@ componentconstructors['markers'] = function(dynmap, configuration) {
 					.addClass('markerName_' + set.id)
 					.addClass('markerName' + marker.dim)
 					.append(marker.label));
+
+			$(div).on('contextmenu', function(cevent) {
+				cevent.stopPropagation();
+				cevent.preventDefault();
+				if (confirm("Marker \"" + marker.label + "\" löschen?")) {
+					$.get("webmarker?type=remove&world=" + dynmap.world.name + "&x=" + Math.round(marker.x) + "&z=" + Math.round(marker.z) + "&name=" + marker.label + "&icon=" + marker.icon, function (data, status) {
+						alert(status);
+						location.reload(true);
+					});
+				}
+			});
 			return div;
 		}});
 		marker.timestamp = ts;
